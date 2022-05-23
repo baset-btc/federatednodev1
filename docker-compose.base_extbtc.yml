@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  addrindexrs:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: addrindexrs-base-mainnet
+
+  addrindexrs-testnet:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: addrindexrs-base-testnet
+
+  counterparty:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: counterparty-base-mainnet
+    links:
+      - addrindexrs
+
+  counterparty-testnet:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: counterparty-base-testnet
+    links:
+      - addrindexrs-testnet
+
+volumes:
+  addrindexrs-data:
+  counterparty-data:

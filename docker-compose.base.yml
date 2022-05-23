@@ -1,0 +1,43 @@
+version: '2'
+
+services:
+  bitcoin:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: bitcoin-base-mainnet
+
+  bitcoin-testnet:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: bitcoin-base-testnet
+
+  addrindexrs:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: addrindexrs-base-mainnet
+
+  addrindexrs-testnet:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: addrindexrs-base-testnet
+
+  counterparty:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: counterparty-base-mainnet
+    links:
+      - bitcoin
+      - addrindexrs
+
+  counterparty-testnet:
+    extends:
+      file: docker-compose.tmpl.yml
+      service: counterparty-base-testnet
+    links:
+      - bitcoin-testnet
+      - addrindexrs-testnet
+
+volumes:
+  bitcoin-data:
+  addrindexrs-data:
+  counterparty-data:
