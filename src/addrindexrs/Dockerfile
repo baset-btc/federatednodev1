@@ -10,5 +10,4 @@ RUN adduser --disabled-login --system --shell /bin/false --uid 1000 user
 WORKDIR /home/user
 COPY ./ /home/user
 
-RUN cargo check
 RUN cargo build --release
